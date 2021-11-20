@@ -91,10 +91,10 @@ public class Jogodavelha {
 	// definindo o jogador da vez
 	if (jogador == 1) { 
 		jog = 1; 
-		System.out.println("\n\n Vez do Jogador " + jogador1); 
+		System.out.println("\n\n Vez do Jogador " + jogador1.nome + " (X):"); 
 	} else { 
 		jog = 2; 
-		System.out.println("\n\n Vez do Jogador " + jogador2); 
+		System.out.println("\n\n Vez do Jogador " + jogador2.nome + " (O):"); 
 	} 
 	while (i == 0) { 
 		linha = 0; // inicializando valor da linha
@@ -167,11 +167,11 @@ public class Jogodavelha {
        
       
        public static void cadastro() { 
-		System.out.println("Digite o nome do jogador 1:"); 
+		System.out.println("Digite o nome do jogador 1 (O):"); 
 	//recebe nome do jogador 1 
 	String nome_jogador1 = leitor.next(); 
 	jogador1 = buscarJogador(nome_jogador1); 
-	System.out.println("Digite o nome do jogador 2:"); 
+	System.out.println("Digite o nome do jogador 2 (X):"); 
 	//recebe nome do jogador 2 
 	String nome_jogador2 = leitor.next(); 
 	jogador2 = buscarJogador(nome_jogador2); 
@@ -207,6 +207,7 @@ public class Jogodavelha {
 	try { 
 		ObjectOutputStream saida = new ObjectOutputStream(new FileOutputStream(arquivo));
 		saida.writeObject(jogadores); 
+		saida.close();
 	} catch (Exception e) { 
 		throw new RuntimeException(e); 
 	}
@@ -215,6 +216,7 @@ public class Jogodavelha {
 		try { 
 		ObjectInputStream saida = new ObjectInputStream(new FileInputStream(arquivo));
 		jogadores = (Jogador[]) saida.readObject();
+		saida.close();
 		while (jogadores[quantidadeJogadores] != null && quantidadeJogadores < 50) {
 			quantidadeJogadores = quantidadeJogadores + 1;
 		} 
